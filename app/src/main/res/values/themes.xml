@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="Base.Theme.MyGalleryApp" parent="Theme.AppCompat.Light">
+        <!--         Customize your light theme here. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="colorAccent">@color/blue</item>
+    </style>
 
-    <style name="Theme.MyGalleryApp" parent="android:Theme.Material.Light.NoActionBar" />
+
+
+    <style name="Theme.MyGalleryApp" parent="Base.Theme.MyGalleryApp" />
+
 </resources>

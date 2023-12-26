@@ -1,4 +1,4 @@
-package com.example.mygalleryapp.ui.feature_gallery.domain.model
+package com.example.mygalleryapp.feature_gallery.domain.model
 
 data class MediaFolder (
     var path: String? = null,

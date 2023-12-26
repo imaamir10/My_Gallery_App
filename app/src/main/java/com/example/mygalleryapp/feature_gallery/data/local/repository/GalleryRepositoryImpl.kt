@@ -1,14 +1,14 @@
-package com.example.mygalleryapp.ui.feature_gallery.data.local.repository
+package com.example.mygalleryapp.feature_gallery.data.local.repository
 
 import android.content.ContentResolver
 import android.provider.MediaStore
-import com.example.mygalleryapp.ui.feature_gallery.domain.model.MediaFolder
-import com.example.mygalleryapp.ui.feature_gallery.domain.repository.GalleryRepository
+import com.example.mygalleryapp.feature_gallery.domain.model.MediaFolder
+import com.example.mygalleryapp.feature_gallery.domain.repository.GalleryRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.File
 
-class GalleryRepositoryImpl:GalleryRepository {
+class GalleryRepositoryImpl: GalleryRepository {
     override suspend fun getMediaFolders(contentResolver: ContentResolver): Flow<List<MediaFolder>>  = flow {
         val mediaFolders = ArrayList<MediaFolder>()
         val mediaPaths = ArrayList<String>()

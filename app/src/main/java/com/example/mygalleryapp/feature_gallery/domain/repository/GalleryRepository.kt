@@ -1,7 +1,7 @@
-package com.example.mygalleryapp.ui.feature_gallery.domain.repository
+package com.example.mygalleryapp.feature_gallery.domain.repository
 
 import android.content.ContentResolver
-import com.example.mygalleryapp.ui.feature_gallery.domain.model.MediaFolder
+import com.example.mygalleryapp.feature_gallery.domain.model.MediaFolder
 import kotlinx.coroutines.flow.Flow
 
 interface GalleryRepository {
