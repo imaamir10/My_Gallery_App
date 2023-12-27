@@ -20,11 +20,14 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.RequestManager
 import com.example.mygalleryapp.R
 import com.example.mygalleryapp.databinding.FragmentMediaFolderBinding
+import com.example.mygalleryapp.feature_gallery.domain.model.MediaFolderData
 import com.example.mygalleryapp.feature_gallery.presentation.adapter.MediaItemAdapter
+import com.example.mygalleryapp.feature_gallery.presentation.callback.MediaFolderCallback
 import com.example.mygalleryapp.feature_gallery.presentation.vm.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -32,7 +35,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class MediaFolderFragment : Fragment(R.layout.fragment_media_folder) {
+class MediaFolderFragment : Fragment(R.layout.fragment_media_folder), MediaFolderCallback {
 
     private var fragmentBinding : FragmentMediaFolderBinding ?= null
 
@@ -41,6 +44,7 @@ class MediaFolderFragment : Fragment(R.layout.fragment_media_folder) {
 
     @Inject
     lateinit var mediaItemAdapter: MediaItemAdapter
+
     private val galleryViewModel : GalleryViewModel by viewModels()
 
     private val STORAGE_PERMISSION_CODE = 23
@@ -48,9 +52,9 @@ class MediaFolderFragment : Fragment(R.layout.fragment_media_folder) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentMediaFolderBinding.bind(view)
         fragmentBinding = binding
-
-//        fragmentBinding?.rvMediaGrid?.layoutManager = GridLayoutManager(requireContext(),2)
         fragmentBinding?.rvMediaGrid?.adapter = mediaItemAdapter
+        mediaItemAdapter.setItemClickListener(this)
+
         if(!checkStoragePermissions()){
             requestForStoragePermissions()
         }else{
@@ -65,6 +69,11 @@ class MediaFolderFragment : Fragment(R.layout.fragment_media_folder) {
             }
         }
         galleryViewModel.fetchMediaFolders(requireContext().contentResolver)
+    }
+
+    override fun onMediaFolderClickListener(mediaFolder: MediaFolderData) {
+        val action = MediaFolderFragmentDirections.actionMediaFolderFragmentToAlbumFolderFragment(mediaFolder)
+        findNavController().navigate(action)
     }
 
     private fun requestForStoragePermissions() {

@@ -7,7 +7,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.mygalleryapp.R
 import com.example.mygalleryapp.feature_gallery.data.local.repository.GalleryRepositoryImpl
 import com.example.mygalleryapp.feature_gallery.domain.repository.GalleryRepository
+import com.example.mygalleryapp.feature_gallery.domain.usecase.GetAllPicturesFromFolderUseCase
 import com.example.mygalleryapp.feature_gallery.domain.usecase.GetMediaFolderUseCase
+import com.example.mygalleryapp.feature_gallery.presentation.adapter.AlbumItemAdapter
 import com.example.mygalleryapp.feature_gallery.presentation.adapter.MediaItemAdapter
 import dagger.Module
 import dagger.Provides
@@ -33,8 +35,16 @@ object GalleryModule {
     }
 
     @Provides
+    fun provideAlbumAdapter(glide: RequestManager): AlbumItemAdapter {
+        return AlbumItemAdapter(glide)
+    }
+
+    @Provides
     @Singleton
     fun provideGetMediaFolderUseCase(repository: GalleryRepository): GetMediaFolderUseCase = GetMediaFolderUseCase(repository)
+    @Provides
+    @Singleton
+    fun provideGetPicturesUseCase(repository: GalleryRepository): GetAllPicturesFromFolderUseCase = GetAllPicturesFromFolderUseCase(repository)
 
     @Provides
     @Singleton

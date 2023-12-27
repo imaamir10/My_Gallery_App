@@ -4,6 +4,7 @@ plugins {
     id ("kotlin-kapt")
     id ("com.google.dagger.hilt.android")
     id ("androidx.navigation.safeargs")
+    id ("kotlin-parcelize")
 }
 
 android {
@@ -78,5 +79,6 @@ dependencies {
 
     implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.20")
+
 
 }

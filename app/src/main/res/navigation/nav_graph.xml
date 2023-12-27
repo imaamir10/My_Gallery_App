@@ -9,5 +9,20 @@
         android:id="@+id/mediaFolderFragment"
         android:label="fragment_listing"
         android:name="com.example.mygalleryapp.feature_gallery.presentation.ui.fragment.MediaFolderFragment"
-        tools:layout="@layout/fragment_media_folder" />
+        tools:layout="@layout/fragment_media_folder" >
+        <action
+            android:id="@+id/action_mediaFolderFragment_to_albumFolderFragment"
+            app:destination="@id/albumFolderFragment" >
+
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/albumFolderFragment"
+        android:name="com.example.mygalleryapp.feature_gallery.presentation.ui.fragment.AlbumFolderFragment"
+        android:label="AlbumFolderFragment" >
+        <argument
+            android:name="mediaData"
+            app:argType="com.example.mygalleryapp.feature_gallery.domain.model.MediaFolderData" />
+    </fragment>
 </navigation>
