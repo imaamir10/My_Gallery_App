@@ -11,7 +11,6 @@ MyGalleryApp is an Android application that allows users to browse and view medi
  3. Permissions: The app requests and handles storage permissions to access media content on the user's device.
 
 
-
 ## Tech Stack
 -   **Language**: Kotlin
 -   **Architecture**: MVVM (Model-View-ViewModel) with clean architecture.
