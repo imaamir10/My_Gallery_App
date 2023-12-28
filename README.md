@@ -98,3 +98,11 @@ Due to time constraints, the UI might not showcase the full potential envisioned
 Additionally, it's essential to highlight that the application has been primarily tested on Realme XT running (OS 11) and Xiaomi Pad 6 (OS 13 ) devices. Regrettably, due to the unavailability of other real devices containting diverse configurations and media content, testing has been limited to these specific devices. The application functions properly on these devices, ensuring basic functionality for images and videos.
 
 This project primarily serves as a demonstration of coding proficiency, showcasing robust backend logic, clean architecture, and efficient data handling. While the current iteration might not emphasize elaborate design or intricate user interface elements, it aims to highlight the developer's expertise in structuring and implementing backend functionalities, following industry-standard practices and clean coding principles.
+
+
+### Screen Shots 
+[Permission Dialog](https://drive.google.com/file/d/1k7kFj4SbQ6mrEFqi93wnJ8crtK-7Ohv6/view?usp=sharing)
+
+[Home screen with all the media folders from the device](https://drive.google.com/file/d/1YldSg8jciWXnJUQ21_wVJfh1ff8PYm9L/view?usp=sharing)
+
+[Album detail Screen containing all the videos and photos inside the folder](https://drive.google.com/file/d/1P_lMjOUVPrEQGyziXzz4_dTmq7jCkdWw/view?usp=sharing)
