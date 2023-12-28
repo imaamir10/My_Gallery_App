@@ -96,12 +96,7 @@ class MediaFolderFragment : Fragment(R.layout.fragment_media_folder), MediaFolde
             }
         } else {
             //Below android 11
-            ActivityCompat.requestPermissions(
-                requireActivity(), arrayOf(
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                ),
-                STORAGE_PERMISSION_CODE
+            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE
             )
         }
     }
@@ -122,7 +117,6 @@ class MediaFolderFragment : Fragment(R.layout.fragment_media_folder), MediaFolde
                 }
             })
 
-    @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

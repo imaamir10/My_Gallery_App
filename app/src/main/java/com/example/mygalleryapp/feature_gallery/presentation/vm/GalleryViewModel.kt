@@ -10,14 +10,14 @@ import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 import androidx.lifecycle.viewModelScope
 import com.example.mygalleryapp.feature_gallery.domain.model.MediaData
-import com.example.mygalleryapp.feature_gallery.domain.usecase.GetAllPicturesFromFolderUseCase
+import com.example.mygalleryapp.feature_gallery.domain.usecase.GetAllMediaFilesFromFolderUseCase
 import kotlinx.coroutines.launch
 
 
 @HiltViewModel
 class GalleryViewModel @Inject constructor(
     private val useCaseGetMediaFolders: GetMediaFolderUseCase,
-    private val useCaseGetPictures:GetAllPicturesFromFolderUseCase
+    private val useCaseGetPictures:GetAllMediaFilesFromFolderUseCase
 ): ViewModel() {
     // StateFlow to handle media folders
     private val _mediaFolders = MutableStateFlow<List<MediaFolderData>>(emptyList())

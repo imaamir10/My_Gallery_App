@@ -7,7 +7,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.mygalleryapp.R
 import com.example.mygalleryapp.feature_gallery.data.local.repository.GalleryRepositoryImpl
 import com.example.mygalleryapp.feature_gallery.domain.repository.GalleryRepository
-import com.example.mygalleryapp.feature_gallery.domain.usecase.GetAllPicturesFromFolderUseCase
+import com.example.mygalleryapp.feature_gallery.domain.usecase.GetAllMediaFilesFromFolderUseCase
 import com.example.mygalleryapp.feature_gallery.domain.usecase.GetMediaFolderUseCase
 import com.example.mygalleryapp.feature_gallery.presentation.adapter.AlbumItemAdapter
 import com.example.mygalleryapp.feature_gallery.presentation.adapter.MediaItemAdapter
@@ -44,7 +44,7 @@ object GalleryModule {
     fun provideGetMediaFolderUseCase(repository: GalleryRepository): GetMediaFolderUseCase = GetMediaFolderUseCase(repository)
     @Provides
     @Singleton
-    fun provideGetPicturesUseCase(repository: GalleryRepository): GetAllPicturesFromFolderUseCase = GetAllPicturesFromFolderUseCase(repository)
+    fun provideGetPicturesUseCase(repository: GalleryRepository): GetAllMediaFilesFromFolderUseCase = GetAllMediaFilesFromFolderUseCase(repository)
 
     @Provides
     @Singleton
