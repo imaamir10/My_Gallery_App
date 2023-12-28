@@ -16,12 +16,13 @@ MyGalleryApp is an Android application that allows users to browse and view medi
 -   **Language**: Kotlin
 -   **Architecture**: MVVM (Model-View-ViewModel) with clean architecture.
 -   **Libraries Used**:
-    -    Hilt (Dagger): Dependency injection framework for streamlined and efficient dependency management.
-    -  Coroutines: Used for asynchronous and non-blocking programming to handle background tasks.
-    -   MVVM Architecture: Follows the Model-View-ViewModel architecture pattern for separation of concerns, and maintaining a clean codebase. 
-     -   Clean Architecture: Adopts clean architecture principles, separating layers into presentation, domain, and data layers for better modularity and testability.
-    -   Glide for image loading
-    -   RecyclerView and DiffUtil for efficient list display
+    -    **Hilt (Dagger)**: Dependency injection framework for streamlined and efficient dependency management.
+    -  **Coroutines**: Used for asynchronous and non-blocking programming to handle background tasks.
+    -   **MVVM Architecture**: Follows the Model-View-ViewModel architecture pattern for separation of concerns, and maintaining a clean codebase. 
+     -   **Clean Architecture**: Adopts clean architecture principles, separating layers into presentation, domain, and data layers for better modularity.
+    -   **Glide** for image loading
+    -   **RecyclerView** and **DiffUtil** for efficient list display
+    - **ViewBinding:** Integrated for streamlined and type-safe access to UI components, reducing null pointer exceptions and enhancing code readability.
 
 ## Getting Started
 To run the project locally, follow these steps:
