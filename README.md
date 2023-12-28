@@ -23,7 +23,7 @@ MyGalleryApp is an Android application that allows users to browse and view medi
     -   **Glide** for image loading
     -   **RecyclerView** and **DiffUtil** for efficient list display
     - **ViewBinding:** Integrated for streamlined and type-safe access to UI components, reducing null pointer exceptions and enhancing code readability.
-
+    - **Navigation Graph:** The app employs Android's Navigation Component with a clear navigation graph, managing various destinations and actions for seamless screen transitions and data passing.
 ## Getting Started
 To run the project locally, follow these steps:
 -   Clone the repository
