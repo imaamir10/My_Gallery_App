@@ -18,12 +18,21 @@ class MediaItemAdapter @Inject constructor(
 
     private var mediaFolders = listOf<MediaFolderData>()
     private var mediaFolderCallback : MediaFolderCallback ?= null
+
+    /**
+     * Set item click listener.
+     */
     fun setItemClickListener(mediaFolderCallback : MediaFolderCallback?){
         this.mediaFolderCallback = mediaFolderCallback
     }
+
     private fun getItem(position: Int): MediaFolderData {
         return mediaFolders[position]
     }
+
+    /**
+     * Update adapter data with a new list of media folders.
+     */
     fun setData(newList: List<MediaFolderData>) {
         val diffCallback = MediaFolderDiffCallback(mediaFolders, newList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
@@ -53,10 +62,14 @@ class MediaItemAdapter @Inject constructor(
                 }
             }
         }
+
+        /**
+         * Bind data to the ViewHolder.
+         */
         fun bind(mediaFolder: MediaFolderData) {
             val builder = StringBuilder()
             builder.append(mediaFolder.folderName)
-            builder.append(" ("+mediaFolder.numberOfMediaFiles+") ")
+            builder.append(" (${mediaFolder.numberOfMediaFiles}) ")
 
             binding.tvFolderName.text = builder.toString()
             glide.load(mediaFolder.firstPic)
@@ -64,6 +77,9 @@ class MediaItemAdapter @Inject constructor(
         }
     }
 
+    /**
+     * DiffUtil Callback for calculating differences between old and new lists.
+     */
     class MediaFolderDiffCallback(private val oldList: List<MediaFolderData>, private val newList: List<MediaFolderData>) : DiffUtil.Callback() {
         override fun getOldListSize(): Int = oldList.size
         override fun getNewListSize(): Int = newList.size

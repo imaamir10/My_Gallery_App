@@ -37,27 +37,31 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MediaFolderFragment : Fragment(R.layout.fragment_media_folder), MediaFolderCallback {
 
-    private var fragmentBinding : FragmentMediaFolderBinding ?= null
-
     @Inject
     lateinit var glide: RequestManager
 
     @Inject
     lateinit var mediaItemAdapter: MediaItemAdapter
 
+    private var fragmentBinding : FragmentMediaFolderBinding ?= null
     private val galleryViewModel : GalleryViewModel by viewModels()
-
     private val STORAGE_PERMISSION_CODE = 23
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentMediaFolderBinding.bind(view)
         fragmentBinding = binding
+        setupMediaGrid()
+        checkAndFetchData()
+    }
+    private fun setupMediaGrid() {
         fragmentBinding?.rvMediaGrid?.adapter = mediaItemAdapter
         mediaItemAdapter.setItemClickListener(this)
+    }
 
-        if(!checkStoragePermissions()){
+    private fun checkAndFetchData() {
+        if (!checkStoragePermissions()) {
             requestForStoragePermissions()
-        }else{
+        } else {
             fetchData()
         }
     }
@@ -148,6 +152,11 @@ class MediaFolderFragment : Fragment(R.layout.fragment_media_folder), MediaFolde
             val read = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
             read == PackageManager.PERMISSION_GRANTED
         }
+    }
+
+    override fun onDestroyView() {
+        fragmentBinding = null
+        super.onDestroyView()
     }
 
 

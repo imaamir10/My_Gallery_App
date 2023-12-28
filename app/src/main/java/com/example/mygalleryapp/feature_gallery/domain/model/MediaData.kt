@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class PictureData(
+data class MediaData(
     var pictureName: String? = null,
     var picturePath: String? = null,
     var pictureSize: String? = null,

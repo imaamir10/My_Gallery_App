@@ -10,7 +10,7 @@ data class MediaFolderData (
     var numberOfMediaFiles: Int = 0,
     var numberOfPictures: Int = 0,
     var firstPic: String? = null,
-    var allImages : ArrayList<PictureData> ?=null
+    var allImages : ArrayList<MediaData> ?=null
 
     ):Parcelable{
     fun addMedia() {

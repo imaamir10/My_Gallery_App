@@ -3,10 +3,9 @@ package com.example.mygalleryapp.feature_gallery.data.local.repository
 import android.content.ContentResolver
 import android.provider.MediaStore
 import com.example.mygalleryapp.feature_gallery.domain.model.MediaFolderData
-import com.example.mygalleryapp.feature_gallery.domain.model.PictureData
+import com.example.mygalleryapp.feature_gallery.domain.model.MediaData
 import com.example.mygalleryapp.feature_gallery.domain.repository.GalleryRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import java.io.File
 
@@ -117,8 +116,8 @@ class GalleryRepositoryImpl : GalleryRepository {
             emit(mediaFolders)
         }
 
-    private suspend fun getAllVideosFromDevice(contentResolver: ContentResolver): Flow<List<PictureData>> = flow {
-            val videos = mutableListOf<PictureData>()
+    private suspend fun getAllVideosFromDevice(contentResolver: ContentResolver): Flow<List<MediaData>> = flow {
+            val videos = mutableListOf<MediaData>()
 
             val videoUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
             val projection = arrayOf(
@@ -137,7 +136,7 @@ class GalleryRepositoryImpl : GalleryRepository {
 
             cursor?.use { cursor ->
                 while (cursor.moveToNext()) {
-                    val video = PictureData().apply {
+                    val video = MediaData().apply {
                         pictureName =
                             cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DISPLAY_NAME))
                         picturePath =
@@ -152,9 +151,9 @@ class GalleryRepositoryImpl : GalleryRepository {
             }
         }
 
-    private suspend fun getAllPicturesFromDevice(contentResolver: ContentResolver): Flow<List<PictureData>> =
+    private suspend fun getAllPicturesFromDevice(contentResolver: ContentResolver): Flow<List<MediaData>> =
         flow {
-            val images = mutableListOf<PictureData>()
+            val images = mutableListOf<MediaData>()
 
             val imageUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             val projection = arrayOf(
@@ -181,7 +180,7 @@ class GalleryRepositoryImpl : GalleryRepository {
 
             cursor?.use { cursor ->
                 while (cursor.moveToNext()) {
-                    val pic = PictureData().apply {
+                    val pic = MediaData().apply {
                         pictureName =
                             cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME))
                         picturePath =
@@ -196,12 +195,12 @@ class GalleryRepositoryImpl : GalleryRepository {
             }
         }
 
-    override suspend fun getAllMediafromFolder(
+    override suspend fun getAllMediaFromSpecificFolder(
         path: String,
         contentResolver: ContentResolver
-    ): Flow<List<PictureData>> = flow {
+    ): Flow<List<MediaData>> = flow {
 
-        val mediaData = mutableListOf<PictureData>()
+        val mediaData = mutableListOf<MediaData>()
 
         val allMediaUri = MediaStore.Files.getContentUri("external")
         val projection = arrayOf(
@@ -237,7 +236,7 @@ class GalleryRepositoryImpl : GalleryRepository {
                         path.endsWith(".webm") ||
                         path.endsWith(".flv") ||
                         path.endsWith(".wmv")
-                val pic = PictureData().apply {
+                val pic = MediaData().apply {
                     pictureName =
                         cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME))
                     picturePath =

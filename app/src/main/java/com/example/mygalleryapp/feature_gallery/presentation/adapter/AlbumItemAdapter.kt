@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.example.mygalleryapp.databinding.PictureItemBinding
-import com.example.mygalleryapp.feature_gallery.domain.model.PictureData
+import com.example.mygalleryapp.feature_gallery.domain.model.MediaData
 import com.example.mygalleryapp.feature_gallery.presentation.callback.PictureCallback
 import javax.inject.Inject
 
@@ -18,19 +18,27 @@ class AlbumItemAdapter @Inject constructor(
 ) : RecyclerView.Adapter<AlbumItemAdapter.PictureViewHolder>(){
 
 
-    private var pictureData = listOf<PictureData>()
+    private var mediaData = listOf<MediaData>()
     private var pictureCallback : PictureCallback?= null
+
+    /**
+     * Set item click listener for the picture.
+     */
     fun setItemClickListener(pictureCallback: PictureCallback){
         this.pictureCallback = pictureCallback
     }
-    private fun getItem(position: Int): PictureData {
-        return pictureData[position]
+    private fun getItem(position: Int): MediaData {
+        return mediaData[position]
     }
-    fun setData(newList: List<PictureData>) {
+
+    /**
+     * Update adapter data with a new list of media items.
+     */
+    fun setData(newList: List<MediaData>) {
         Log.e("data",newList.toString())
-        val diffCallback = PictureDiffCallback(pictureData, newList)
+        val diffCallback = PictureDiffCallback(mediaData, newList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
-        pictureData = newList
+        mediaData = newList
         diffResult.dispatchUpdatesTo(this)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PictureViewHolder {
@@ -38,11 +46,11 @@ class AlbumItemAdapter @Inject constructor(
         return PictureViewHolder(binding)
     }
     override fun onBindViewHolder(holder: PictureViewHolder, position: Int) {
-        holder.bind(pictureData[position])
+        holder.bind(mediaData[position])
     }
 
     override fun getItemCount(): Int {
-        return pictureData.size
+        return mediaData.size
     }
 
     inner class PictureViewHolder(private var binding: PictureItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -56,19 +64,20 @@ class AlbumItemAdapter @Inject constructor(
                 }
             }
         }
-        fun bind(mediaFolder: PictureData) {
+        fun bind(mediaFolder: MediaData) {
             glide.load(mediaFolder.picturePath)
                 .apply(RequestOptions().centerCrop())
                 .into(binding.ivPicture)
 
-            if(mediaFolder.isFileVideo)
-                binding.ivPlay.visibility = View.VISIBLE
-            else
-                binding.ivPlay.visibility = View.GONE
+            binding.ivPlay.visibility = if (mediaFolder.isFileVideo) View.VISIBLE else View.GONE
         }
     }
 
-    class PictureDiffCallback(private val oldList: List<PictureData>, private val newList: List<PictureData>) : DiffUtil.Callback() {
+    /**
+     * DiffUtil Callback for calculating differences between old and new lists of media items.
+     */
+
+    class PictureDiffCallback(private val oldList: List<MediaData>, private val newList: List<MediaData>) : DiffUtil.Callback() {
         override fun getOldListSize(): Int = oldList.size
         override fun getNewListSize(): Int = newList.size
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

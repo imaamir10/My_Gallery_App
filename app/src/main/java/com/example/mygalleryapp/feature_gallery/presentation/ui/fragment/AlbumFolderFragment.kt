@@ -1,7 +1,6 @@
 package com.example.mygalleryapp.feature_gallery.presentation.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,7 +10,7 @@ import com.bumptech.glide.RequestManager
 import com.example.mygalleryapp.R
 import com.example.mygalleryapp.databinding.FragmentAlbumFolderBinding
 import com.example.mygalleryapp.feature_gallery.domain.model.MediaFolderData
-import com.example.mygalleryapp.feature_gallery.domain.model.PictureData
+import com.example.mygalleryapp.feature_gallery.domain.model.MediaData
 import com.example.mygalleryapp.feature_gallery.presentation.adapter.AlbumItemAdapter
 import com.example.mygalleryapp.feature_gallery.presentation.callback.PictureCallback
 import com.example.mygalleryapp.feature_gallery.presentation.vm.GalleryViewModel
@@ -35,36 +34,40 @@ class AlbumFolderFragment: Fragment(R.layout.fragment_album_folder), PictureCall
         super.onViewCreated(view, savedInstanceState)
         val args: AlbumFolderFragmentArgs by navArgs()
         val receivedMediaFolder: MediaFolderData = args.mediaData
-
         val binding = FragmentAlbumFolderBinding.bind(view)
         fragmentBinding = binding
+        setupAlbumGrid()
+        fetchData(receivedMediaFolder)
+    }
+    private fun setupAlbumGrid() {
         fragmentBinding?.rvAlbumGrid?.adapter = albumAdapter
         fragmentBinding?.rvAlbumGrid?.addItemDecoration(ItemMarginDecoration(requireContext()))
         albumAdapter.setItemClickListener(this)
-        fetchData(receivedMediaFolder)
     }
 
     private fun fetchData(receivedMediaFolder: MediaFolderData){
-
         if(!receivedMediaFolder.allImages.isNullOrEmpty()){
             receivedMediaFolder.allImages?.toList()?.let { albumAdapter.setData(it) }
         }else {
             lifecycleScope.launch {
-                galleryViewModel.pictureData.collect { folders ->
-                    Log.e("list", folders.toString())
+                galleryViewModel.mediaData.collect { folders ->
                     albumAdapter.setData(folders)
                 }
             }
             receivedMediaFolder.path?.let {
-                galleryViewModel.fetchPitureData(it, requireContext().contentResolver)
+                galleryViewModel.fetchPictureData(it, requireContext().contentResolver)
             }
         }
 
     }
 
 
-    override fun onPictureClickListener(pictureData: PictureData) {
+    override fun onPictureClickListener(mediaData: MediaData) {
 
     }
 
+    override fun onDestroyView() {
+        fragmentBinding = null
+        super.onDestroyView()
+    }
 }

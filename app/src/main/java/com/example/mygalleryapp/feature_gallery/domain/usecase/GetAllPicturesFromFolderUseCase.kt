@@ -5,5 +5,5 @@ import com.example.mygalleryapp.feature_gallery.domain.repository.GalleryReposit
 
 class GetAllPicturesFromFolderUseCase (private val repository: GalleryRepository) {
     suspend operator fun invoke(path: String,contentResolver: ContentResolver) =
-        repository.getAllMediafromFolder(path,contentResolver)
+        repository.getAllMediaFromSpecificFolder(path,contentResolver)
 }
